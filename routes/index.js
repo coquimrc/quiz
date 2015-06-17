@@ -7,4 +7,8 @@ router.get('/', function(req, res, next) {
 });
 router.get('/quizes/question',quizController.question);
 router.get('/quizes/answer',quizController.answer);
+// página para autor
+router.get('/author', function(req, res) {
+  res.render('author', {autor: 'Maria R. Corbalan'});
+});
 module.exports = router;
