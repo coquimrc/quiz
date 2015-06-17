@@ -31,3 +31,25 @@ footer{
 nav span{
   margin: 0px 10px 0px 0px;
 }
+img{
+  border-radius: 50% 0 50% 0; height:100px; width:100px;
+}
+.foto {
+  transition: 1.5s ease;
+   		-moz-transition: 1.5s ease; /* Firefox */
+   		-webkit-transition: 1.5s ease; /* Chrome - Safari */
+     -o-transition: 1.5s ease; /* Opera */}
+
+.foto:hover{
+  transform : scale(2);
+		-moz-transform : scale(2); /* Firefox */
+		-webkit-transform : scale(2); /* Chrome - Safari */
+		-o-transform : scale(2); /* Opera */
+		-ms-transform : scale(2); /* IE9 */
+
+    }
+
+video{
+  width: 50%;
+  height: 50%;
+}
