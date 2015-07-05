@@ -31,6 +31,10 @@ footer{
 nav span{
   margin: 0px 10px 0px 0px;
 }
+#ErrorMsgs{
+  color: #f61;
+  font-size: : smaler;
+}
 img{
   border-radius: 50% 0 50% 0; height:100px; width:100px;
 }
