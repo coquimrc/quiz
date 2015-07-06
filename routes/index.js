@@ -18,6 +18,7 @@ router.put('/quizes/:quizId(\\d+)', quizController.update);
 router.delete('/quizes/:quizId(\\d+)', quizController.destroy);
 // página para autor
 router.get('/author', function(req, res, next) {
-  res.render('author', {autor: 'Maria R. Corbalan'});
+  res.render('author', {autor: 'Maria R. Corbalan',  errors: []});
+  
 });
 module.exports = router;
