@@ -1,7 +1,12 @@
 var models = require('../models/models.js');
 //autoload- factoriza el codigo si ruta incluye :quizId
 exports.load = function(req, res, next, quizId) {
- models.Quiz.findById(quizId).then(
+ models.Quiz.find(
+   {
+     where:{ id: Number(quizId)},
+     include: [{model: models.Comment}]
+   }
+ ).then(
  function(quiz) {
      if (quiz) {
       req.quiz = quiz;
@@ -47,7 +52,7 @@ var resultado = 'Incorrecto';
    };
    exports.new = function(req,res){
      var quiz = models.Quiz.build(//crea objeto quiz
-       {pregunta: "Pregunta", respuesta: "Respuesta"}
+       {pregunta: "Pregunta", respuesta: "Respuesta" , tema: "Tema"}
      );
      res.render('quizes/new',{quiz: quiz,    errors: []});
    };
@@ -62,7 +67,7 @@ exports.create = function(req,res){
         res.render('quizes/new', {quiz: quiz, errors: err.errors});
       } else {
         //guarda en DB los campos pregunta y respuesta de quiz
-        quiz.save({fields: ["pregunta", "respuesta"]}).then(function(){
+        quiz.save({fields: ["pregunta", "respuesta", "tema"]}).then(function(){
           res.redirect('/quizes');
         })//redireccion HTTP (url relativo) lista de preguntas
       }
@@ -86,7 +91,7 @@ exports.update = function(req,res){
         res.render('quizes/edit',{quiz: req.quiz, errors: err.errors});
       }else{
         req.quiz // save guarda campos pregunta y respuesta en DB
-        .save({fields: ["pregunta", "respuesta"] })
+        .save({fields: ["pregunta", "respuesta", "tema"] })
         .then(function(){res.redirect('/quizes');});
       }// redireccion HTTP a lista preguntas
     }

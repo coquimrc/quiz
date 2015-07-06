@@ -25,10 +25,16 @@ var sequelize = new Sequelize(DB_name, user, pwd,
 }
 );
 //importar la definicion de la tabla quiz en quiz.js
-var Quiz = sequelize.import(path.join(__dirname,'Quiz'));
+var Quiz = sequelize.import(path.join(__dirname,'quiz'));
+//importar definicion de la tabla comment
+var comment_path =  path.join(__dirname,'comment');
+var Comment = sequelize.import(comment_path);
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
 
 //exportar definicion de tabla quiz
 exports.Quiz = Quiz;
+exports.Comment = Comment;
 //sequelize.sync() crea e inicializa tabla de preguntas ern DB
 // sequelize.sync() inicializa tabla de preguntas en DB
 sequelize.sync().then(function() {
@@ -36,10 +42,12 @@ sequelize.sync().then(function() {
   Quiz.count().then(function (count){
     if(count === 0) {   // la tabla se inicializa solo si está vacía
       Quiz.bulkCreate(
-        [ {pregunta: 'Capital de Italia',   respuesta: 'Roma'},
-        {pregunta: 'Capital de Argentina',   respuesta: 'Buenos Aires'},
-          {pregunta: 'Capital de Panamá',   respuesta: 'Panamá'},
-          {pregunta: 'Capital de Portugal', respuesta: 'Lisboa'}
+        [ {pregunta: 'Capital de Italia',   respuesta: 'Roma', tema: 'Humanidades'},
+        {pregunta: 'Capital de Argentina',   respuesta: 'Buenos Aires',tema: 'Humanidades'},
+          {pregunta: 'Capital de Panamá',   respuesta: 'Panamá',tema: 'Humanidades'},
+            {pregunta: 'Campeon copa America 2015',   respuesta: 'Chile',tema: 'Ocio'},
+                        {pregunta: 'Avion impulsado por energia solar',   respuesta: 'Solar Impulse 2',tema: 'Ciencia'},
+          {pregunta: 'Capital de Portugal', respuesta: 'Lisboa',tema: 'Humanidades'}
         ]
       ).then(function(){console.log('Base de datos inicializada')});
     };
