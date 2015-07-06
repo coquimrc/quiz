@@ -22,6 +22,11 @@ router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 // página para autor
 router.get('/author', function(req, res, next) {
+<<<<<<< HEAD
   res.render('author', {autor: 'Maria R. Corbalan', errors: []});
+=======
+  res.render('author', {autor: 'Maria R. Corbalan',  errors: []});
+  
+>>>>>>> fbd957bfaf1f411d0c438eecb7b0931cc85334e0
 });
 module.exports = router;
