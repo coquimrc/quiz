@@ -17,6 +17,7 @@ exports.new = function(req,res){
 
 //post /login -- crear la sesion
 exports.create = function (req,res){
+
   var login = req.body.login;
   var password = req.body.password;
   var useController =  require('./user_controller');
